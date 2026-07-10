@@ -1,0 +1,140 @@
+/* ================= DETAIL MODAL BODY ================= */
+.modal-body {
+  padding: 1.8rem;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.8rem;
+}
+
+.modal-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.modal-plot {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.modal-cast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cast-member-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.6rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: left;
+  font-family: inherit;
+}
+
+.cast-member-btn:hover {
+  background: var(--accent-blue-light);
+  color: var(--accent-blue);
+  border-color: #bfdbfe;
+}
+
+/* Modal Right Column (Sidebar details) */
+.modal-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Movie Poster inside Modal Details */
+.modal-poster {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+  max-height: 250px;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.info-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.info-item {
+  margin-bottom: 0.75rem;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+  font-weight: 600;
+}
+
+.info-value {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.btn-favorite {
+  width: auto;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+
+.btn-favorite:hover {
+  background: #fff1f2;
+  border-color: #fda4af;
+  color: #e11d48;
+}
+
+.btn-favorite.active {
+  background: #ffe4e6;
+  border-color: #fda4af;
+  color: #e11d48;
+}
+
+@media (max-width: 600px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+    padding: 1.2rem;
+    gap: 1.2rem;
+  }
+  
+  .modal-right-col {
+    order: -1;
+  }
+}

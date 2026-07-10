@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Logs and system directories
+*.log
+.gemini/
+.agents/
+.cortex/
+cortex.json
+scratch/
+
+# OS temporary files
+.DS_Store
+Thumbs.db

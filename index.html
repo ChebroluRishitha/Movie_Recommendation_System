@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover personalized movie recommendations across English, Hindi, and Telugu. Filter by genre, language, and ratings.">
+  <meta name="keywords" content="movies, recommendation, cinema, English, Hindi, Telugu, film database, genres">
+  <title>Movie Recommendation System | Multilingual Cinema</title>
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Modular Stylesheets (Each under 150 lines) -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/wizard.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="css/modal_base.css">
+  <link rel="stylesheet" href="css/modal_body.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo" id="navLogo">
+        <i class="fa-solid fa-clapperboard"></i> Movie Recommendation System
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <h1>Movie Recommendation System</h1>
+      <p>Discover and filter movies across English, Hindi, and Telugu. Select your preferences below to find recommendations.</p>
+      
+      <!-- Search Bar -->
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search by title, genre, or actors...">
+        <button class="btn-search" id="btnSearch">Search</button>
+      </div>
+    </section>
+
+    <!-- RECOMMENDATION WIZARD -->
+    <section class="wizard-section" id="wizard">
+      <div class="wizard-header">
+        <h2><i class="fa-solid fa-film"></i> Movie Recommendation</h2>
+        <p>Select your preferences below to get an instant recommendation.</p>
+      </div>
+      
+      <div class="wizard-grid">
+        <!-- Language Option -->
+        <div class="wizard-col">
+          <h3>1. Choose Language</h3>
+          <div class="filter-pills-row" id="wizardLanguageGroup">
+            <button class="pill-btn active" data-lang="All">Any Language</button>
+            <button class="pill-btn" data-lang="English">English</button>
+            <button class="pill-btn" data-lang="Hindi">Hindi</button>
+            <button class="pill-btn" data-lang="Telugu">Telugu</button>
+            <button class="pill-btn" data-lang="Tamil">Tamil</button>
+          </div>
+        </div>
+        
+        <!-- Genre Option -->
+        <div class="wizard-col">
+          <h3>2. Choose Genre</h3>
+          <select id="wizardGenreSelect">
+            <option value="All">All Genres</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Horror">Horror</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Thriller">Thriller</option>
+          </select>
+        </div>
+        
+        <!-- Rating Option -->
+        <div class="wizard-col">
+          <h3>3. Minimum Rating</h3>
+          <select id="wizardRatingSelect">
+            <option value="0">Any Rating</option>
+            <option value="7.5">Highly Rated (7.5+)</option>
+            <option value="8.0">Critically Acclaimed (8.0+)</option>
+            <option value="8.5">Masterpieces Only (8.5+)</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="wizard-actions">
+        <button class="btn-match" id="btnFindMatch">
+          <i class="fa-solid fa-film"></i> Find My Movie
+        </button>
+      </div>
+    </section>
+
+    <!-- MAIN APP CONTENT (SIDEBAR + GRID) -->
+    <div class="main-content" id="explore">
+      
+      <!-- SIDEBAR FILTERS -->
+      <aside class="sidebar-filters">
+        <div class="filter-group">
+          <h4>My Wishlist</h4>
+          <div class="sidebar-pills" id="sidebarWatchlist">
+            <button class="sidebar-pill" id="btnWatchlistFilter">
+              <span><i class="fa-solid fa-heart"></i> Saved Movies</span>
+              <span class="count" id="count-watchlist">0</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Language</h4>
+          <div class="sidebar-pills" id="sidebarLanguages">
+            <button class="sidebar-pill active" data-lang="All">
+              <span>All Languages</span>
+              <span class="count" id="count-lang-all">0</span>
+            </button>
+            <button class="sidebar-pill" data-lang="English">
+              <span>English</span>
+              <span class="count" id="count-lang-english">0</span>
+            </button>
+            <button class="sidebar-pill" data-lang="Hindi">
+              <span>Hindi</span>
+              <span class="count" id="count-lang-hindi">0</span>
+            </button>
+            <button class="sidebar-pill" data-lang="Telugu">
+              <span>Telugu</span>
+              <span class="count" id="count-lang-telugu">0</span>
+            </button>
+            <button class="sidebar-pill" data-lang="Tamil">
+              <span>Tamil</span>
+              <span class="count" id="count-lang-tamil">0</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Genre</h4>
+          <div class="sidebar-pills" id="sidebarGenres">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <button class="filter-reset-btn" id="btnResetFilters">
+          <i class="fa-solid fa-arrows-rotate"></i> Reset All Filters
+        </button>
+      </aside>
+
+      <!-- RESULTS SECTION -->
+      <section class="results-section">
+        <div class="results-header">
+          <div class="results-count">
+            Found <span id="moviesCount">0</span> movies
+          </div>
+          
+          <div class="sort-wrapper">
+            <label for="sortSelect">Sort By</label>
+            <select class="sort-select" id="sortSelect">
+              <option value="rating">Rating (Highest First)</option>
+              <option value="year-desc">Year (Newest First)</option>
+              <option value="year-asc">Year (Oldest First)</option>
+              <option value="title">Title (A-Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Movie Grid -->
+        <div class="movie-grid" id="movieGrid">
+          <!-- Dynamically populated with Javascript -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-logo"><i class="fa-solid fa-clapperboard"></i> Movie Recommendation System</div>
+      <p>&copy; 2026 Movie Recommendation System. Designed for film enthusiasts.</p>
+      <p>Done by Rishitha Chebrolu from IIT Bombay</p>
+    </footer>
+
+  </div>
+
+  <!-- DETAIL MODAL -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-container">
+      <button class="btn-close-modal" id="btnCloseModal" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-genre-tags" id="modalGenres">
+          <!-- Dynamic tags -->
+        </div>
+        <div class="modal-title-row">
+          <h2 class="modal-movie-title" id="modalTitle">Movie Title</h2>
+          <button class="btn-favorite" id="btnFavorite">
+            <i class="fa-regular fa-heart"></i> Save to Watchlist
+          </button>
+        </div>
+        <div class="modal-meta-row">
+          <div class="modal-meta-item rating">
+            <i class="fa-solid fa-star"></i> <span id="modalRating">9.0</span>/10
+          </div>
+          <div class="modal-meta-item">
+            <i class="fa-solid fa-calendar"></i> <span id="modalYear">2024</span>
+          </div>
+          <div class="modal-meta-item">
+            <i class="fa-solid fa-clock"></i> <span id="modalDuration">2h 30m</span>
+          </div>
+          <div class="modal-meta-item">
+            <i class="fa-solid fa-language"></i> <span id="modalLanguage">English</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="modal-left-col">
+          <div class="modal-section-title">Plot Summary</div>
+          <p class="modal-plot" id="modalPlot">
+            Movie plot goes here...
+          </p>
+          
+          <div class="modal-section-title">Main Cast</div>
+          <div class="modal-cast-list" id="modalCast">
+            <!-- Dynamic cast list -->
+          </div>
+        </div>
+        
+        <div class="modal-right-col">
+          <img class="modal-poster" id="modalPoster" src="" alt="Movie Poster" onerror="this.style.display='none';">
+          <div class="info-card">
+            <div class="info-item">
+              <div class="info-label">Original Language</div>
+              <div class="info-value" id="modalInfoLang">English</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Release Year</div>
+              <div class="info-value" id="modalInfoYear">2024</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Classification</div>
+              <div class="info-value">Feature Film</div>
+            </div>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Javascript Datasets (Each under 150 lines) -->
+  <script src="js/data_english.js"></script>
+  <script src="js/data_hindi.js"></script>
+  <script src="js/data_telugu.js"></script>
+  <script src="js/data_tamil.js"></script>
+  <script src="js/movies.js"></script>
+  
+  <!-- Modular Javascript Logic controllers (Each under 150 lines) -->
+  <script src="js/app_state.js"></script>
+  <script src="js/app_filter.js"></script>
+  <script src="js/app_grid.js"></script>
+  <script src="js/app_modal.js"></script>
+  <script src="js/app_wizard.js"></script>
+  <script src="js/app_main.js"></script>
+</body>
+</html>

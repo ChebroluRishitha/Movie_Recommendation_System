@@ -1,0 +1,108 @@
+/* ================= EXPLORE CONTENT ================= */
+.main-content {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Sidebar filter */
+.sidebar-filters {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  position: sticky;
+  top: 1.5rem;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-group h4 {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.sidebar-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: var(--transition-fast);
+  text-align: left;
+}
+
+.sidebar-pill:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.sidebar-pill.active {
+  background: var(--accent-blue-light);
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.sidebar-pill .count {
+  font-size: 0.75rem;
+  background: #e2e8f0;
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  color: var(--text-secondary);
+}
+
+.sidebar-pill.active .count {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--accent-blue);
+}
+
+.filter-reset-btn {
+  width: 100%;
+  padding: 0.6rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  transition: var(--transition-fast);
+}
+
+.filter-reset-btn:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #ef4444;
+}
+
+@media (max-width: 800px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar-filters {
+    position: static;
+    margin-bottom: 1.5rem;
+  }
+}
