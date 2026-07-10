@@ -71,3 +71,13 @@ movie_recommendation_system/
    ```bash
    npx http-server
    ```
+
+---
+
+## ⚠️ Limitations
+
+- **Static Database**: The movie collection is hardcoded inside modular JavaScript files (`data_*.js`) rather than being queried from a dynamic external database or live APIs (like TMDB/IMDb).
+- **Local Storage Reliance**: The watchlist feature relies entirely on client-side `localStorage`. Clearing browser cache or switching devices will wipe saved preferences.
+- **Client-Side Heavy Processing**: Search filtering, sorting, and recommendation calculations are executed directly on the client's browser thread, which could face bottlenecks if scaled to thousands of movies.
+- **Manual Image Management**: The theatrical posters must be downloaded locally in the `posters/` folder. Bypassing the local cache requires manual scraper script execution.
+
